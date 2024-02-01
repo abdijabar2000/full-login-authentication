@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f2f2f2;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 8px 12px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      background-color: #fff;
+      border-radius: 4px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    li form {
+      margin-left: auto;
+    }
+
+    li input[type="text"] {
+      margin-right: 10px;
+    }
+
+    li button {
+      background-color: #f44336;
+    }
+  </style>
+</head>
+<body>
+  <h1>To-Do List</h1>
+  <form action="/add" method="POST">
+    <input type="text" name="task" placeholder="Add a task" required>
+    <button type="submit">Add</button>
+  </form>
+  
+  <ul>
+    <% tasks.forEach((task, index) => { %>
+      <li>
+        <%= task %>
+        <form action="/update/<%= index %>" method="POST">
+          <input type="text" name="task" placeholder="Update task" required>
+          <button type="submit">Update</button>
+        </form>
+        <form action="/delete/<%= index %>" method="GET">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+    <% }); %>
+  </ul>
+</body>
+</html>
